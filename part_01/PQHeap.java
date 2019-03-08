@@ -20,10 +20,12 @@ public class PQHeap implements PQ {
         elements = new Element[maxElms - 1];
     }
     /**
-     * This method extracts element 0 from the array.    
+     * This method extracts smallest Element from the array/heap and cut the size of the array/heap   
+     * @param return smallest Element after array has been minheapified  
      */
     @Override
     public Element extractMin() {
+        //
         Element min = elements[0];
         elements[0] = elements[heapSize - 1];
         heapSize--;
