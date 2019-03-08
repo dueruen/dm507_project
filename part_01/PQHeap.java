@@ -19,7 +19,9 @@ public class PQHeap implements PQ {
     public PQHeap(int maxElms) {
         elements = new Element[maxElms - 1];
     }
-
+    /**
+     * This method extracts element 0 from the array.    
+     */
     @Override
     public Element extractMin() {
         Element min = elements[0];
