@@ -36,14 +36,21 @@ public class PQHeap implements PQ {
     @Override
     public void insert(Element e) {
         int i = heapSize;
-        elements[i] = e; //Element is inserted into last index of array / heap
-        while (i > 0 && elements[Parrent(i)].getKey() > elements[i].getKey()) { //While i is larger than zero (while there are still parent nodes), and the parent of the new element is larger than it's child
-            Element tmp = elements[i]; //placeholder element is initialized as element at index i 
-            elements[i] = elements[Parrent(i)];  //Element at index i is set equal to it's own parents index, positioning it higher in the heap
-            elements[Parrent(i)] = tmp; //Parent node is set equal to inserted element via placeholder - the inserted element has now been moved upwards once
-            i = Parrent(i); //i is set to the index of the next parentnode
+         //Element is inserted into last index of array / heap
+        elements[i] = e;
+        //While i is larger than zero (while there are still parent nodes), and the parent of the new element is larger than it's child
+        while (i > 0 && elements[Parrent(i)].getKey() > elements[i].getKey()) { 
+            //placeholder element is initialized as element at index i 
+            Element tmp = elements[i]; 
+            //Element at index i is set equal to it's own parents index, positioning it higher in the heap
+            elements[i] = elements[Parrent(i)];  
+            //Parent node is set equal to inserted element via placeholder - the inserted element has now been moved upwards once
+            elements[Parrent(i)] = tmp; 
+            //i is set to the index of the next parentnode
+            i = Parrent(i); 
         }
-        heapSize++; //when the loop is completed, heapsize has been incremented by 1
+        //when the loop is completed, heapsize is incremented by 1
+        heapSize++; 
     }
 
    /**
