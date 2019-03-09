@@ -25,7 +25,6 @@ public class PQHeap implements PQ {
      */
     @Override
     public Element extractMin() {
-        //
         Element min = elements[0];
         elements[0] = elements[heapSize - 1];
         heapSize--;
