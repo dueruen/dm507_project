@@ -19,12 +19,19 @@ public class PQHeap implements PQ {
     public PQHeap(int maxElms) {
         elements = new Element[maxElms - 1];
     }
-
+    /**
+     * This method extracts smallest Element from the array/heap and cut the size of the array/heap   
+     * @param return smallest Element after array has been minheapified  
+     */
     @Override
     public Element extractMin() {
+        // set min to index 0 
         Element min = elements[0];
+        // Index 0 is sat to the higest element 
         elements[0] = elements[heapSize - 1];
+        // reduce heapSize by one, to remove element
         heapSize--;
+        // calls MinHeapify to put array in to min-heap order after removal of element    
         MinHeapify(elements, 0);
         return min;
     }
