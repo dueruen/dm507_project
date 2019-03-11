@@ -25,9 +25,13 @@ public class PQHeap implements PQ {
      */
     @Override
     public Element extractMin() {
+        // set min to index 0 
         Element min = elements[0];
+        // Index 0 is sat to the higest element 
         elements[0] = elements[heapSize - 1];
+        // reduce heapSize by one, to remove element
         heapSize--;
+        // calls MinHeapify to put array in to min-heap order after removal of element    
         MinHeapify(elements, 0);
         return min;
     }
