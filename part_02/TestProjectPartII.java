@@ -1,8 +1,13 @@
-/*
- * Test program exercising DictBinTree.java. Move to the directory
- * containing the project java files, compile and run.
+/**
+ * DM507, Software Engineering
+ * 
+ * Test program exercising DictBinTree.java. Move to the directory containing
+ * the project java files, compile and run.
+ * 
+ * @author Mads Due Kristensen, madkr17@student.sdu.dk
+ * @auther Victor Gram Thomsen, vitho17@student.sdu.dk
+ * @auther Jeppe Hannibal Niemann, niema17@student.sdu.dk
  */
-
 public class TestProjectPartII {
 
 	public static void main(String[] args) {
