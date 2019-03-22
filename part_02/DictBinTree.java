@@ -15,10 +15,6 @@ public class DictBinTree implements Dict {
     public void insert(int k) {
         nodeCount++;
         Node z = new Node(k);
-        if (root == null) {
-            root = z;
-            return;
-        }
         Node y = null;
         Node x = root;
         while (x != null) {
