@@ -20,7 +20,21 @@ public class DictBinTree implements Dict {
 
     @Override
     public boolean search(int k) {
-        return false;
+        return search(root, k);
+        
+    }
+
+    private boolean search(Node x, int k) { 
+        if (x.key == k) { 
+            return true;
+        }
+
+        if(k < x.key) { 
+            return search(x.leftChild, k);
+        }
+        else {
+            return search(x.rightChild, k);
+        }
     }
 
     private class Node {
