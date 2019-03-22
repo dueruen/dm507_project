@@ -73,33 +73,79 @@ public class DictBinTree implements Dict {
         return a;
     }
 
+    /**
+     * Returns a boolean value, based on whether or not a node 
+     * with the key k is present in the tree
+     * @param k the keuy to check for */ 
     @Override
     public boolean search(int k) {
+        //Passes k to private inner function, along with root node of tree
         return search(root, k);
     }
 
+    /**
+     * Private recursive function, that returns a boolean based on
+     * whether or not a node with the given key exists
+     * The search is performed by traversing thorugh the nodes of the 
+     * tree, staring with the node given as an argument
+     * @param x the node from were the search starts
+     * @param k the node-key that the function is searching for
+     */
     private boolean search(Node x, int k) {
+        /*
+        If the node that is passed doesn't exist (is null), the search can't 
+        be performed, and the node is assumed to be not present
+        in the tree - return false
+        */
         if (x == null) {
             return false;
         }
+        //Base-case of method, the correct node is found - return true
         if (k == x.key) {
             return true;
         }
-
+        /*
+        If the key of the current node is smaller than
+        the key that is wanted, a recursive call is made
+        passing the current nodes left child node as an argument
+        and with k remaining the same 
+        */
         if (k < x.key) {
             return search(x.leftChild, k);
+       /*
+        If the key of the current node is larger than
+        the key that is wanted, a recursive call is made
+        passing the current nodes right child node as an argument
+        and with k remaining the same 
+       */
         } else {
             return search(x.rightChild, k);
         }
     }
 
+    /**
+     * Private inner Node class
+     */
     private class Node {
-        public Node(int key) {
+        /**
+         * Constructor, initialising the node with it's key
+         * @param key the nodes key value
+         */
+        public Node(int key) { 
             this.key = key;
         }
 
+        /**
+         * Nodes key value
+         */
         int key;
+        /**
+         * The left child of the node
+         */
         Node leftChild;
+        /**
+         * The right child of the node
+         */
         Node rightChild;
     }
 
