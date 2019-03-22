@@ -25,6 +25,10 @@ public class DictBinTree implements Dict {
     }
 
     private boolean search(Node x, int k) { 
+        if (x == null) {
+            return false;
+        }
+        
         if (x.key == k) { 
             return true;
         }
