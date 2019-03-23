@@ -76,7 +76,9 @@ public class DictBinTree implements Dict {
     /**
      * Returns a boolean value, based on whether or not a node 
      * with the key k is present in the tree
-     * @param k the keuy to check for */ 
+     * @param k the keuy to check for 
+     * @return boolean based on whether a node with the key is present
+     */ 
     @Override
     public boolean search(int k) {
         //Passes k to private inner function, along with root node of tree
@@ -90,6 +92,7 @@ public class DictBinTree implements Dict {
      * tree, staring with the node given as an argument
      * @param x the node from were the search starts
      * @param k the node-key that the function is searching for
+     * @return boolean based on whether a node with the key is present
      */
     private boolean search(Node x, int k) {
         /*
