@@ -11,20 +11,35 @@ public class DictBinTree implements Dict {
     private int nodeCount;
     private int traversalCount;
 
+    /**
+     * This method inserts a node in to the binary tree and preserves struckter
+     * after the insertion
+     * 
+     * @param k key for the new node
+     */
     @Override
     public void insert(int k) {
+        // Increases the nodeCount variable by 1 (used to determine the size of the
+        // array in the orderedTraversal method)
         nodeCount++;
+        // New node with a new key
         Node z = new Node(k);
+        // determineariable used in loops
         Node y = null;
+        // Root node of the binary tree
         Node x = root;
+        // Compares the new node to the root node
         while (x != null) {
+            // Sets y = root node
             y = x;
+            //
             if (z.key < x.key) {
                 x = x.leftChild;
             } else {
                 x = x.rightChild;
             }
         }
+        // Situation where root is null
         if (y == null) {
             root = z;
         } else if (z.key < y.key) {
@@ -74,53 +89,52 @@ public class DictBinTree implements Dict {
     }
 
     /**
-     * Returns a boolean value, based on whether or not a node 
-     * with the key k is present in the tree
-     * @param k the keuy to check for 
+     * Returns a boolean value, based on whether or not a node with the key k is
+     * present in the tree
+     * 
+     * @param k the key to check for
      * @return boolean based on whether a node with the key is present
-     */ 
+     */
     @Override
     public boolean search(int k) {
-        //Passes k to private inner function, along with root node of tree
+        // Passes k to private inner function, along with root node of tree
         return search(root, k);
     }
 
     /**
-     * Private recursive function, that returns a boolean based on
-     * whether or not a node with the given key exists
-     * The search is performed by traversing thorugh the nodes of the 
-     * tree, staring with the node given as an argument
+     * Private recursive function, that returns a boolean based on whether or not a
+     * node with the given key exists The search is performed by traversing thorugh
+     * the nodes of the tree, staring with the node given as an argument
+     * 
      * @param x the node from were the search starts
      * @param k the node-key that the function is searching for
      * @return boolean based on whether a node with the key is present
      */
     private boolean search(Node x, int k) {
         /*
-        If the node that is passed doesn't exist (is null), the search can't 
-        be performed, and the node is assumed to be not present
-        in the tree - return false
-        */
+         * If the node that is passed doesn't exist (is null), the search can't be
+         * performed, and the node is assumed to be not present in the tree - return
+         * false
+         */
         if (x == null) {
             return false;
         }
-        //Base-case of method, the correct node is found - return true
+        // Base-case of method, the correct node is found - return true
         if (k == x.key) {
             return true;
         }
         /*
-        If the key of the current node is smaller than
-        the key that is wanted, a recursive call is made
-        passing the current nodes left child node as an argument
-        and with k remaining the same 
-        */
+         * If the key of the current node is smaller than the key that is wanted, a
+         * recursive call is made passing the current nodes left child node as an
+         * argument and with k remaining the same
+         */
         if (k < x.key) {
             return search(x.leftChild, k);
-       /*
-        If the key of the current node is larger than
-        the key that is wanted, a recursive call is made
-        passing the current nodes right child node as an argument
-        and with k remaining the same 
-       */
+            /*
+             * If the key of the current node is larger than the key that is wanted, a
+             * recursive call is made passing the current nodes right child node as an
+             * argument and with k remaining the same
+             */
         } else {
             return search(x.rightChild, k);
         }
@@ -132,9 +146,10 @@ public class DictBinTree implements Dict {
     private class Node {
         /**
          * Constructor, initialising the node with it's key
+         * 
          * @param key the nodes key value
          */
-        public Node(int key) { 
+        public Node(int key) {
             this.key = key;
         }
 
