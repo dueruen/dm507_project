@@ -46,7 +46,7 @@ public class DictBinTree implements Dict {
         if (y == null) {
             // new node becomes root
             root = z;
-            // if the y key is smaler than the root key.
+            // if the y key is smaller than the root key.
         } else if (z.key < y.key) {
             // y will become y nodes left node
             y.leftChild = z;
