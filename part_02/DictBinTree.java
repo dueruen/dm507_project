@@ -28,22 +28,29 @@ public class DictBinTree implements Dict {
         Node y = null;
         // Root node of the binary tree
         Node x = root;
-        // Compares the new node to the root node
+        // Checks that x isn't null
         while (x != null) {
             // Sets y = root node
             y = x;
-            //
+            // If z is smaller than x.
             if (z.key < x.key) {
+                // x is the left child
                 x = x.leftChild;
+                // else x the right child
             } else {
+                // x is the right child
                 x = x.rightChild;
             }
         }
         // Situation where root is null
         if (y == null) {
+            // new node becomes root
             root = z;
+            // if the y key is smaler than the root key.
         } else if (z.key < y.key) {
+            // y will become y nodes left node
             y.leftChild = z;
+            // if not will become the right child in the tree
         } else {
             y.rightChild = z;
         }
