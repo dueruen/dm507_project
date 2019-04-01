@@ -24,7 +24,7 @@ public class DictBinTree implements Dict {
         nodeCount++;
         // New node with a new key
         Node z = new Node(k);
-        // determineariable used in loops
+        // vallibel used in loops
         Node y = null;
         // Root node of the binary tree
         Node x = root;
