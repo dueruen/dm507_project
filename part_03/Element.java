@@ -1,9 +1,9 @@
 public class Element {
 
     private int key;
-    private BinTree tree;
+    private DictBinTree tree;
 
-    public Element(int i, BinTree tree){
+    public Element(int i, DictBinTree tree){
 	this.key = i;
 	this.tree = tree;
     }

@@ -1,10 +1,6 @@
-
 import java.lang.Math;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
-
-
 
 public class Encode {
     public Encode(String[] args) {
@@ -34,7 +30,7 @@ public class Encode {
             }
             int b;
 			while ((b = inFile.read()) != -1) {
-                for (String s : keyTable[b].split()) {
+                for (String s : keyTable[b].split("")) {
                     out.writeBit(Integer.parseInt(s));
                 }
 			}
@@ -68,7 +64,7 @@ public class Encode {
     private PQ populateQueue(int[] input) { 
         PQ q = new PQHeap(input.length);
         for (int i: input) { 
-            q.insert(new Element(i, new BinTree()));
+            q.insert(new Element(i, null));
         }
         return q;
     }
