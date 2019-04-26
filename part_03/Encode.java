@@ -39,7 +39,7 @@ public class Encode {
         }
     }
   
-    public Element huffMan(int[] input) { 
+    public Element huffman(int[] input) { 
         int n = Math.abs(input.length);
         PQ q = populateQueue(input);
         for(int i = 0; i < n; i++) {
