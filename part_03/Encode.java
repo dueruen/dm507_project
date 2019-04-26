@@ -12,7 +12,13 @@ public class Encode {
             Element right = q.extractMin();
             Element y = right;
             int key = x.getKey() + y.getKey();
-            q.insert(new Element(key, new BinTree()));
+
+            DictBinTree tree = new DictBinTree();
+            tree.insert(key);
+            tree.insert(x.getKey());
+            tree.insert(y.getKey());
+
+            q.insert(new Element(key, tree));
 
         }
         return q.extractMin();
