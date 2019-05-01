@@ -8,8 +8,37 @@
 public class DictBinTree implements Dict {
 
     private Node root;
-    private StringBuilder keyWordBuilder;
-    
+
+    public Node getRoot() {
+        return root;
+    }
+
+    public DictBinTree(int key, int index, Element left, Element right) {
+        //System.out.println("INDEX: " + index + "  key: " + key);
+        root = new Node(key, index);
+        //System.out.println("Lefttree " + left.getTree() + " right: " + right.getTree());
+        if (left.getTree() == null && right.getTree() == null) {
+            root.leftChild = new Node(left.getKey(), left.getIndex());
+            root.rightChild = new Node(right.getKey(), right.getIndex());
+        } else if (left.getTree() == null) {
+            root.leftChild = new Node(left.getKey(), left.getIndex());
+            root.rightChild = right.getTree().getRoot();
+        } else if (right.getTree() == null) {
+            root.leftChild = left.getTree().getRoot();
+            root.rightChild = new Node(right.getKey(), right.getIndex());
+        } else {
+            root.leftChild = left.getTree().getRoot();
+            root.rightChild = right.getTree().getRoot();
+        }
+        System.out.println("Root: " + index + " left " + root.leftChild.index + "  right " + root.rightChild.index);
+    }
+
+    // public void createTree(int rootKey, int rootIndex, int leftKey, int leftIndex, int rightKey, int rightIndex) {
+    //     root = new Node(rootKey, rootIndex);
+    //     root.leftChild = new Node(leftKey, leftIndex);
+    //     root.rightChild = new Node(rightKey, rightIndex);
+    // }
+
     /**
      * This method inserts a node in to the binary tree and preserves struckter
      * after the insertion
@@ -17,9 +46,9 @@ public class DictBinTree implements Dict {
      * @param k key for the new node
      */
     @Override
-    public void insert(int k, int index) {
+    public void insert(Element e) {
         // New node with a new key
-        Node z = new Node(k, index);
+        Node z = e.getTree().getRoot();
         // vallibel used in loops
         Node y = null;
         // Root node of the binary tree
@@ -61,6 +90,11 @@ public class DictBinTree implements Dict {
     public String[] orderedTraversal() {
         // Call the private orderedTraversal with the root nood and a empty array
         // and returns the result
+        //int[] t = TESTorderedTraversal();
+        // for (int i : t) {
+        //     System.out.println("i: " + i);
+        // }
+
         return orderedTraversal(root, new String[256]);
     }
 
@@ -76,47 +110,97 @@ public class DictBinTree implements Dict {
     private String[] orderedTraversal(Node x, String[] a) {
         // Checks that x isn't null
         if (x != null) {
-            keyWordBuilder.append(0);
+            //System.out.println(x.index);
+            if (x.index != -1) {
+                if (a[x.index] == null) {
+                    a[x.index] = "";
+                }
+                a[x.index] = a[x.index] + "0"; 
+            }
+            
+            // keyWordBuilder.append(0);
             // Expaneds the left child node
             orderedTraversal(x.leftChild, a);
             // Sets the x's key accordingly to the current traversalCount
             
-            keyWordBuilder.append(1);
+            if (x.index != -1) {
+                if (a[x.index] == null) {
+                    a[x.index] = "";
+                }
+                a[x.index] = a[x.index] + "1"; 
+            }
+            // keyWordBuilder.append(1);
             // Expands the right child node
             orderedTraversal(x.rightChild, a);
         }
-        a[x.index] = keyWordBuilder.toString();
-        keyWordBuilder = new StringBuilder();
+        
+        // keyWordBuilder = new StringBuilder();
         // Return the ordered array
         return a;
     }
 
+    int traversalCount;
+
+    //@Override
+    // public int[] TESTorderedTraversal() {
+    //     // Resets the traversal count to zero
+    //     traversalCount = 0;
+    //     // Call the private orderedTraversal with the root nood and a empty array
+    //     // and returns the result
+    //     return orderedTraversal(root, new int[256]);
+    // }
+
+    /**
+     * This method is for internal use, it returns array of all the numbers in the
+     * tree in increasing order
+     * 
+     * @param x is the node to expaned from
+     * @param a is the ordered array
+     * 
+     * @return int[] This is the array this the numbers
+     */
+    // private int[] orderedTraversal(Node x, int[] a) {
+    //     // Checks that x isn't null
+    //     if (x != null) {
+    //         // Expaneds the left child node
+    //         orderedTraversal(x.leftChild, a);
+    //         // Sets the x's key accordingly to the current traversalCount
+    //         a[traversalCount] = x.key;
+    //         // The traversalCount is increased
+    //         traversalCount++;
+    //         // Expaneds the right child node
+    //         orderedTraversal(x.rightChild, a);
+    //     }
+    //     // Return the ordered array
+    //     return a;
+    // }
+
     /**
      * Private inner Node class
      */
-    private class Node {
-        /**
-         * Constructor, initialising the node with it's key
-         * 
-         * @param key the nodes key value
-         */
-        public Node(int key, int index) {
-            this.key = key;
-            this.index = index;
-        }
-        int index;
-        /**
-         * Nodes key value
-         */
-        int key;
-        /**
-         * The left child of the node
-         */
-        Node leftChild;
-        /**
-         * The right child of the node
-         */
-        Node rightChild;
-    }
+    // private class Node {
+    //     /**
+    //      * Constructor, initialising the node with it's key
+    //      * 
+    //      * @param key the nodes key value
+    //      */
+    //     public Node(int key, int index) {
+    //         this.key = key;
+    //         this.index = index;
+    //     }
+    //     int index;
+    //     /**
+    //      * Nodes key value
+    //      */
+    //     int key;
+    //     /**
+    //      * The left child of the node
+    //      */
+    //     Node leftChild;
+    //     /**
+    //      * The right child of the node
+    //      */
+    //     Node rightChild;
+    // }
 
 }

@@ -6,8 +6,7 @@
  * @auther Jeppe Hannibal Niemann, niema17@student.sdu.dk
  */
 public interface Dict {
-    public void insert(int k, int index);
-
+    public void insert(Element e);
     public String[] orderedTraversal();
 
 }
