@@ -28,6 +28,7 @@ public class PQHeap implements PQ {
         // set min to index 0 
         Element min = elements[0];
         // Index 0 is sat to the higest element 
+        System.out.println(heapSize); 
         elements[0] = elements[heapSize - 1];
         // reduce heapSize by one, to remove element
         heapSize--;

@@ -8,9 +8,8 @@
 public class DictBinTree implements Dict {
 
     private Node root;
-    private int nodeCount;
-    private int traversalCount;
-
+    private StringBuilder keyWordBuilder;
+    
     /**
      * This method inserts a node in to the binary tree and preserves struckter
      * after the insertion
@@ -18,12 +17,9 @@ public class DictBinTree implements Dict {
      * @param k key for the new node
      */
     @Override
-    public void insert(int k) {
-        // Increases the nodeCount variable by 1 (used to determine the size of the
-        // array in the orderedTraversal method)
-        nodeCount++;
+    public void insert(int k, int index) {
         // New node with a new key
-        Node z = new Node(k);
+        Node z = new Node(k, index);
         // vallibel used in loops
         Node y = null;
         // Root node of the binary tree
@@ -62,12 +58,10 @@ public class DictBinTree implements Dict {
      * @return int[] This is the array this the numbers
      */
     @Override
-    public int[] orderedTraversal() {
-        // Resets the traversal count to zero
-        traversalCount = 0;
+    public String[] orderedTraversal() {
         // Call the private orderedTraversal with the root nood and a empty array
         // and returns the result
-        return orderedTraversal(root, new int[nodeCount]);
+        return orderedTraversal(root, new String[256]);
     }
 
     /**
@@ -79,72 +73,22 @@ public class DictBinTree implements Dict {
      * 
      * @return int[] This is the array this the numbers
      */
-    private int[] orderedTraversal(Node x, int[] a) {
+    private String[] orderedTraversal(Node x, String[] a) {
         // Checks that x isn't null
         if (x != null) {
+            keyWordBuilder.append(0);
             // Expaneds the left child node
             orderedTraversal(x.leftChild, a);
             // Sets the x's key accordingly to the current traversalCount
-            a[traversalCount] = x.key;
-            // The traversalCount is increased
-            traversalCount++;
-            // Expaneds the right child node
+            
+            keyWordBuilder.append(1);
+            // Expands the right child node
             orderedTraversal(x.rightChild, a);
         }
+        a[x.index] = keyWordBuilder.toString();
+        keyWordBuilder = new StringBuilder();
         // Return the ordered array
         return a;
-    }
-
-    /**
-     * Returns a boolean value, based on whether or not a node with the key k is
-     * present in the tree
-     * 
-     * @param k the key to check for
-     * @return boolean based on whether a node with the key is present
-     */
-    @Override
-    public boolean search(int k) {
-        // Passes k to private inner function, along with root node of tree
-        return search(root, k);
-    }
-
-    /**
-     * Private recursive function, that returns a boolean based on whether or not a
-     * node with the given key exists The search is performed by traversing thorugh
-     * the nodes of the tree, staring with the node given as an argument
-     * 
-     * @param x the node from were the search starts
-     * @param k the node-key that the function is searching for
-     * @return boolean based on whether a node with the key is present
-     */
-    private boolean search(Node x, int k) {
-        /*
-         * If the node that is passed doesn't exist (is null), the search can't be
-         * performed, and the node is assumed to be not present in the tree - return
-         * false
-         */
-        if (x == null) {
-            return false;
-        }
-        // Base-case of method, the correct node is found - return true
-        if (k == x.key) {
-            return true;
-        }
-        /*
-         * If the key of the current node is smaller than the key that is wanted, a
-         * recursive call is made passing the current nodes left child node as an
-         * argument and with k remaining the same
-         */
-        if (k < x.key) {
-            return search(x.leftChild, k);
-            /*
-             * If the key of the current node is larger than the key that is wanted, a
-             * recursive call is made passing the current nodes right child node as an
-             * argument and with k remaining the same
-             */
-        } else {
-            return search(x.rightChild, k);
-        }
     }
 
     /**
@@ -156,10 +100,11 @@ public class DictBinTree implements Dict {
          * 
          * @param key the nodes key value
          */
-        public Node(int key) {
+        public Node(int key, int index) {
             this.key = key;
+            this.index = index;
         }
-
+        int index;
         /**
          * Nodes key value
          */
