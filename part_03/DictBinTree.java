@@ -30,7 +30,7 @@ public class DictBinTree implements Dict {
             root.leftChild = left.getTree().getRoot();
             root.rightChild = right.getTree().getRoot();
         }
-        System.out.println("Root: " + index + " left " + root.leftChild.index + "  right " + root.rightChild.index);
+        //System.out.println("Root: " + index + " left " + root.leftChild.index + "  right " + root.rightChild.index);
     }
 
     // public void createTree(int rootKey, int rootIndex, int leftKey, int leftIndex, int rightKey, int rightIndex) {
@@ -90,14 +90,18 @@ public class DictBinTree implements Dict {
     public String[] orderedTraversal() {
         // Call the private orderedTraversal with the root nood and a empty array
         // and returns the result
-        //int[] t = TESTorderedTraversal();
+        //System.out.println("TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT " + countter);
+        // int[] t = TESTorderedTraversal();
         // for (int i : t) {
-        //     System.out.println("i: " + i);
+        //     //System.out.println("i: " + i);
         // }
-
-        return orderedTraversal(root, new String[256]);
+        String[] te = orderedTraversal(root, new String[256]);
+        //System.out.println("TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT2222::: " + countter);
+        return te;
     }
 
+    private StringBuilder currentPath = new StringBuilder();
+    private int indexCount;
     /**
      * This method is for internal use, it returns array of all the numbers in the
      * tree in increasing order
@@ -110,29 +114,54 @@ public class DictBinTree implements Dict {
     private String[] orderedTraversal(Node x, String[] a) {
         // Checks that x isn't null
         if (x != null) {
+            indexCount = x.index;
             //System.out.println(x.index);
-            if (x.index != -1) {
-                if (a[x.index] == null) {
-                    a[x.index] = "";
-                }
-                a[x.index] = a[x.index] + "0"; 
-            }
-            
+            // if (x.index != -1) {
+            //     if (a[x.index] == null) {
+            //         a[x.index] = "";
+            //     }
+            //     a[x.index] = a[x.index] + "0"; 
+            // }
+            currentPath.append("0");
+
             // keyWordBuilder.append(0);
             // Expaneds the left child node
             orderedTraversal(x.leftChild, a);
             // Sets the x's key accordingly to the current traversalCount
             
-            if (x.index != -1) {
-                if (a[x.index] == null) {
-                    a[x.index] = "";
-                }
-                a[x.index] = a[x.index] + "1"; 
-            }
+            // if (x.index != -1) {
+            //     if (a[x.index] == null) {
+            //         a[x.index] = "";
+            //     }
+            //     a[x.index] = a[x.index]orderedTraversal + "1"; 
+            // }
             // keyWordBuilder.append(1);
             // Expands the right child node
-            orderedTraversal(x.rightChild, a);
+            currentPath.append("1");
+            orderedTraversal(x.rightChild, a);    
         }
+
+        if (x != null) {
+            if (x.index != -1) {
+                //System.out.println((char)indexCount + " : " + currentPath.toString());
+                a[indexCount] = currentPath.toString();   
+            }
+            // System.out.println(currentPath.toString());
+            // currentPath.deleteCharAt(currentPath.length() - 1);
+        }
+        if (currentPath.length() != 0){
+            //System.out.println(currentPath.toString());
+            currentPath.deleteCharAt(currentPath.length() - 1);
+        }
+
+        
+
+        // a[indexCount] = currentPath.toString();
+        
+        // if (left) {
+        //     currentPath.
+        // }
+        
         
         // keyWordBuilder = new StringBuilder();
         // Return the ordered array
@@ -142,13 +171,14 @@ public class DictBinTree implements Dict {
     int traversalCount;
 
     //@Override
-    // public int[] TESTorderedTraversal() {
-    //     // Resets the traversal count to zero
-    //     traversalCount = 0;
-    //     // Call the private orderedTraversal with the root nood and a empty array
-    //     // and returns the result
-    //     return orderedTraversal(root, new int[256]);
-    // }
+    public int[] TESTorderedTraversal() {
+        // Resets the traversal count to zero
+        traversalCount = 0;
+        // Call the private orderedTraversal with the root nood and a empty array
+        // and returns the result
+        //System.out.println("Root: " + root + " left " + root.leftChild + "  right " + root.rightChild);
+        return orderedTraversal(root, new int[2000]);
+    }
 
     /**
      * This method is for internal use, it returns array of all the numbers in the
@@ -159,21 +189,23 @@ public class DictBinTree implements Dict {
      * 
      * @return int[] This is the array this the numbers
      */
-    // private int[] orderedTraversal(Node x, int[] a) {
-    //     // Checks that x isn't null
-    //     if (x != null) {
-    //         // Expaneds the left child node
-    //         orderedTraversal(x.leftChild, a);
-    //         // Sets the x's key accordingly to the current traversalCount
-    //         a[traversalCount] = x.key;
-    //         // The traversalCount is increased
-    //         traversalCount++;
-    //         // Expaneds the right child node
-    //         orderedTraversal(x.rightChild, a);
-    //     }
-    //     // Return the ordered array
-    //     return a;
-    // }
+    int countter;
+    private int[] orderedTraversal(Node x, int[] a) {
+        // Checks that x isn't null
+        if (x != null) {
+            countter++;
+            // Expaneds the left child node
+            orderedTraversal(x.leftChild, a);
+            // Sets the x's key accordingly to the current traversalCount
+            a[traversalCount] = x.key;
+            // The traversalCount is increased
+            traversalCount++;
+            // Expaneds the right child node
+            orderedTraversal(x.rightChild, a);
+        }
+        // Return the ordered array
+        return a;
+    }
 
     /**
      * Private inner Node class
