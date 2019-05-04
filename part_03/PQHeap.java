@@ -28,7 +28,6 @@ public class PQHeap implements PQ {
         // set min to index 0 
         Element min = elements[0];
         // Index 0 is sat to the higest element 
-        // System.out.println(heapSize); 
         elements[0] = elements[heapSize - 1];
         // reduce heapSize by one, to remove element
         heapSize--;
@@ -46,14 +45,8 @@ public class PQHeap implements PQ {
         int i = heapSize;
          //Element is inserted into last index of array / heap
         elements[i] = e;
-        // System.out.println("i: " + i);
-        // System.out.println("Parent: " + Parrent(i));
-        // System.out.println("Elements l: " + elements.length);
-        //System.out.println("e1 key: " + elements[Parrent(i)].getKey());
-        // System.out.println("!!!!!!!!!!!!!!");
         //While i is larger than zero (while there are still parent nodes), and the parent of the new element is larger than it's child
         while (i > 0 && elements[Parrent(i)].getKey() > elements[i].getKey()) { 
-            // System.out.println("HERE");
             //placeholder element is initialized as element at index i 
             Element tmp = elements[i]; 
             //Element at index i is set equal to it's own parents index, positioning it higher in the heap
@@ -64,7 +57,6 @@ public class PQHeap implements PQ {
             i = Parrent(i); 
         }
         //when the loop is completed, heapsize is incremented by 1
-        // System.out.println("Insert:: " + heapSize);
         heapSize++; 
     }
 
@@ -102,7 +94,6 @@ public class PQHeap implements PQ {
     * @return the parent index
    */    
     private int Parrent(int i) {
-        // System.out.println("Ceil: " + Math.ceil(i / 2.0));
         return (int)Math.ceil(i / 2.0) - 1;
     }
 
