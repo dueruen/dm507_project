@@ -17,7 +17,7 @@ public class PQHeap implements PQ {
     * @param maxElms the max size of the array.
    */
     public PQHeap(int maxElms) {
-        elements = new Element[maxElms - 1];
+        elements = new Element[maxElms];
     }
     /**
      * This method extracts smallest Element from the array/heap and cut the size of the array/heap   
@@ -28,7 +28,6 @@ public class PQHeap implements PQ {
         // set min to index 0 
         Element min = elements[0];
         // Index 0 is sat to the higest element 
-        System.out.println(heapSize); 
         elements[0] = elements[heapSize - 1];
         // reduce heapSize by one, to remove element
         heapSize--;
@@ -72,12 +71,12 @@ public class PQHeap implements PQ {
         int r = Right(i);
         int smallest;
 
-        if (l <= heapSize && A[l].getKey() < A[i].getKey()) {
+        if (l < heapSize && A[l].getKey() < A[i].getKey()) {
             smallest = l;
         } else {
             smallest = i;
         }
-        if (r <= heapSize && A[r].getKey() < A[smallest].getKey()) {
+        if (r < heapSize && A[r].getKey() < A[smallest].getKey()) {
             smallest = r;
         }
         if (smallest != i) {
@@ -95,7 +94,7 @@ public class PQHeap implements PQ {
     * @return the parent index
    */    
     private int Parrent(int i) {
-        return i / 2;
+        return (int)Math.ceil(i / 2.0) - 1;
     }
 
    /**
@@ -104,7 +103,7 @@ public class PQHeap implements PQ {
     * @return index of element to the left
    */      
     private int Left(int i) {
-        return 2 * i;
+        return (2 * i) + 1;
     }
 
    /**
@@ -113,6 +112,6 @@ public class PQHeap implements PQ {
     * @return index of element to the right
    */       
     private int Right(int i) {
-        return 2 * i + 1;
+        return 2 * i + 2;
     }
 }

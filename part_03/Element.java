@@ -15,7 +15,7 @@ public class Element {
     public int getIndex(){
 	return this.index;
     }
-    public Dict getTree(){
+    public DictBinTree getTree(){
 	return this.tree;
     }
 }

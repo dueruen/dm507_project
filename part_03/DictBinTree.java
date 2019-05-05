@@ -7,87 +7,78 @@
  */
 public class DictBinTree implements Dict {
 
+    //Root node
     private Node root;
-    private StringBuilder keyWordBuilder;
-    
+    //Used to keep a keyword/path to the root node
+    private StringBuilder currentPath = new StringBuilder();
+    //Used to travers through the tree 
+    private int indexCount;
+
     /**
-     * This method inserts a node in to the binary tree and preserves struckter
-     * after the insertion
-     * 
-     * @param k key for the new node
+     * Creates a new tree
+     * @param key of the root
+     * @param index of the root
+     * @param left element containg the tree that are going to be the left child
+     * @param right element containg the tree that are going to be the right child
      */
-    @Override
-    public void insert(int k, int index) {
-        // New node with a new key
-        Node z = new Node(k, index);
-        // vallibel used in loops
-        Node y = null;
-        // Root node of the binary tree
-        Node x = root;
-        // Checks that x isn't null
-        while (x != null) {
-            // Sets y = root node
-            y = x;
-            // If z is smaller than x.
-            if (z.key < x.key) {
-                // x is the left child
-                x = x.leftChild;
-                // else x the right child
-            } else {
-                // x is the right child
-                x = x.rightChild;
-            }
-        }
-        // Situation where root is null
-        if (y == null) {
-            // new node becomes root
-            root = z;
-            // if the y key is smaller than the root key.
-        } else if (z.key < y.key) {
-            // y will become y nodes left node
-            y.leftChild = z;
-            // if not will become the right child in the tree
-        } else {
-            y.rightChild = z;
+    public DictBinTree(int key, int index, Element left, Element right) {
+        //Instanciates the root
+        root = new Node(key, index);
+        //if the left and right elements tree's arn't create
+        if (left.getTree() == null && right.getTree() == null) {
+            root.leftChild = new Node(left.getKey(), left.getIndex());
+            root.rightChild = new Node(right.getKey(), right.getIndex());
+        } else if (left.getTree() == null) { //left tree arn't create
+            root.leftChild = new Node(left.getKey(), left.getIndex());
+            root.rightChild = right.getTree().root;
+        } else if (right.getTree() == null) { //right tree arn't create
+            root.leftChild = left.getTree().root;
+            root.rightChild = new Node(right.getKey(), right.getIndex());
+        } else { //both tree's are created
+            root.leftChild = left.getTree().root;
+            root.rightChild = right.getTree().root;
         }
     }
 
     /**
-     * This method returns array of all the numbers in the tree in increasing order
+     * This method returns array of all the keywords in the tree
      * 
-     * @return int[] This is the array this the numbers
+     * @return String[] This is the array this the keywords
      */
     @Override
     public String[] orderedTraversal() {
-        // Call the private orderedTraversal with the root nood and a empty array
-        // and returns the result
         return orderedTraversal(root, new String[256]);
     }
 
     /**
-     * This method is for internal use, it returns array of all the numbers in the
-     * tree in increasing order
+     * This method is for internal use, it returns array of all the keywords in the
+     * tree.
      * 
      * @param x is the node to expaned from
      * @param a is the ordered array
      * 
-     * @return int[] This is the array this the numbers
+     * @return String[] This is the array this the keywords
      */
     private String[] orderedTraversal(Node x, String[] a) {
         // Checks that x isn't null
         if (x != null) {
-            keyWordBuilder.append(0);
-            // Expaneds the left child node
+            indexCount = x.index;
+            currentPath.append("0");
             orderedTraversal(x.leftChild, a);
-            // Sets the x's key accordingly to the current traversalCount
-            
-            keyWordBuilder.append(1);
-            // Expands the right child node
-            orderedTraversal(x.rightChild, a);
+
+            currentPath.append("1");
+            orderedTraversal(x.rightChild, a);    
         }
-        a[x.index] = keyWordBuilder.toString();
-        keyWordBuilder = new StringBuilder();
-        // Return the ordered array
+
+        if (x != null) {
+            //if not a leave
+            if (x.index != -1) {
+                a[indexCount] = currentPath.toString();   
+            }
+        }
+        if (currentPath.length() != 0){
+            currentPath.deleteCharAt(currentPath.length() - 1);
+        }
         return a;
     }
 
@@ -118,5 +109,4 @@ public class DictBinTree implements Dict {
          */
         Node rightChild;
     }
-
 }

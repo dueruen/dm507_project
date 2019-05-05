@@ -1,4 +1,3 @@
-import java.lang.Math;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -19,24 +18,20 @@ public class Encode {
 				frequency[b] += 1;
 			}
         } catch(Exception e) {
-            System.out.println(e);
+            throw new Error(e);
         }
         return frequency;
     }
 
     public Element huffman(int[] input) { 
-        int n = Math.abs(input.length);
+        int n = input.length;
         PQ q = populateQueue(input);
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < n - 1; i++) {
             Element x = q.extractMin();
             Element y = q.extractMin();
             int key = x.getKey() + y.getKey();
 
-            DictBinTree tree = new DictBinTree();
-            tree.insert(key, -1);
-            tree.insert(x.getKey(), x.getIndex());
-            tree.insert(y.getKey(), y.getIndex());
-
+            DictBinTree tree = new DictBinTree(key, -1, x, y);
             q.insert(new Element(key, tree, -1));
         }
         return q.extractMin();   
@@ -61,17 +56,14 @@ public class Encode {
                 }
 			}
         } catch(Exception e) {
-            System.out.println(e);
+            throw new Error(e);
         }
     }
 
     private PQ populateQueue(int[] input) { 
         PQ q = new PQHeap(input.length);
         for (int i = 0; i < input.length; i++) {
-            if (input[i] == 0) {
-                continue;
-            }
-            q.insert(new Element(i, null, input[i]));
+            q.insert(new Element(input[i], null, i));
         }
         return q;
     }
