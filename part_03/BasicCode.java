@@ -1,3 +1,10 @@
+/**
+ * DM507, Software Engineering
+ * 
+ * @author Mads Due Kristensen, madkr17@student.sdu.dk
+ * @auther Victor Gram Thomsen, vitho17@student.sdu.dk
+ * @auther Jeppe Hannibal Niemann, niema17@student.sdu.dk
+ */
 public abstract class BasicCode{
     public Element huffman(int[] input) { 
         int n = input.length;

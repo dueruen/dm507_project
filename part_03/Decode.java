@@ -32,7 +32,6 @@ public class Decode extends BasicCode{
             Node currentNode = e.getTree().getRoot();
             int currentByte = 0;
             while ((b = in.readBit()) != -1 && currentByte != totalBytes ) {
-                System.out.println(currentByte);
                 currentNode = e.getTree().nextNode(currentNode, b);
                 if (b == 0 && currentNode.leftChild == null) {
                     outFile.write(currentNode.index);
@@ -46,13 +45,10 @@ public class Decode extends BasicCode{
                     continue;
                 }
             }
-            System.out.println("TOTAL: " + totalBytes);
         } catch(Exception e) {
             throw new Error(e);
         }
-
     }
-
     public static void main(String[] args) { 
         Decode e = new Decode(args);
     }
