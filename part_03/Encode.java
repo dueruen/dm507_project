@@ -1,7 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class Encode {
+public class Encode extends BasicCode{
     
     public Encode(String[] args) {
         int[] frequency = scanInputFile(args[0]);
@@ -21,20 +21,6 @@ public class Encode {
             throw new Error(e);
         }
         return frequency;
-    }
-
-    public Element huffman(int[] input) { 
-        int n = input.length;
-        PQ q = populateQueue(input);
-        for(int i = 0; i < n - 1; i++) {
-            Element x = q.extractMin();
-            Element y = q.extractMin();
-            int key = x.getKey() + y.getKey();
-
-            DictBinTree tree = new DictBinTree(key, -1, x, y);
-            q.insert(new Element(key, tree, -1));
-        }
-        return q.extractMin();   
     }
 
     public String[] generateKeywordTable(Element root) { 
@@ -58,14 +44,6 @@ public class Encode {
         } catch(Exception e) {
             throw new Error(e);
         }
-    }
-
-    private PQ populateQueue(int[] input) { 
-        PQ q = new PQHeap(input.length);
-        for (int i = 0; i < input.length; i++) {
-            q.insert(new Element(input[i], null, i));
-        }
-        return q;
     }
 
     public static void main(String[] args) { 

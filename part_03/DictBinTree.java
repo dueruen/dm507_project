@@ -40,6 +40,14 @@ public class DictBinTree implements Dict {
         }
     }
 
+    public Node nextNode(Node n, int inputBit) {
+        if (inputBit == 0) {
+            return n.leftChild;
+        } else {
+            return n.rightChild;
+        }
+    }
+
     /**
      * This method returns array of all the keywords in the tree
      * 
@@ -83,30 +91,9 @@ public class DictBinTree implements Dict {
     }
 
     /**
-     * Private inner Node class
+     * @return the root
      */
-    private class Node {
-        /**
-         * Constructor, initialising the node with it's key
-         * 
-         * @param key the nodes key value
-         */
-        public Node(int key, int index) {
-            this.key = key;
-            this.index = index;
-        }
-        int index;
-        /**
-         * Nodes key value
-         */
-        int key;
-        /**
-         * The left child of the node
-         */
-        Node leftChild;
-        /**
-         * The right child of the node
-         */
-        Node rightChild;
+    public Node getRoot() {
+        return root;
     }
 }
