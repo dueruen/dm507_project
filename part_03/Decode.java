@@ -3,12 +3,13 @@ import java.io.FileInputStream;
 
 public class Decode {
 
-    public Decode(String file) {
+    public Decode(String inputFile) {
         try {
-            BitInputStream inFile = new BitInputStream(file);
-            inFile.BitInputStream(file);
+            FileInputStream fin = new FileInputStream(inputFile);
+            BitInputStream inFile = new BitInputStream(fin);
             inFile.readBit();
-            inFile.readint(file);
+            inFile.readint(fin);
+            Encode.houfman();
             inFile.close();
         } catch (Exception e) {
             System.out.println(e);
