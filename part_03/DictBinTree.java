@@ -50,7 +50,7 @@ public class DictBinTree implements Dict {
         //If the bit is zero, go left
         if (inputBit == 0) { 
             return n.leftChild;
-        } else { //go left
+        } else { //go right
             return n.rightChild;
         }
     }
@@ -82,13 +82,13 @@ public class DictBinTree implements Dict {
             //tree thet traversal has come
             indexCount = x.index;
 
-            //recursievely adds 0, 
-            //until no more left child node
+            //adds 0, 
+            //and recursively expands left child node
             currentPath.append("0");
             orderedTraversal(x.leftChild, a);
 
-            //recursievely adds 1, 
-            //until no more left child node
+            //adds 0, 
+            //and recursively expands right child node
             currentPath.append("1");
             orderedTraversal(x.rightChild, a);    
         }
